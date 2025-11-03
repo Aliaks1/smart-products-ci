@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Products — Aliaksandra Bryshten 69000</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- 🧩 BACKEND URL — подставь свой Render backend -->
+  <script>
+    window.BACKEND_URL = "https://products-ci-aliaks.onrender.com"; 
+  </script>
+</head>
+
+<body>
+  <header class="hero">
+    <h1>Smart Products</h1>
+    <p>Walidacje + CI/CD + Testy — pełny system CRUD</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Dodaj / Edytuj produkt</h2>
+      <form id="productForm" novalidate>
+        <div class="grid">
+          <label>Nazwa
+            <input id="name" name="name" required minlength="3" maxlength="50" />
+          </label>
+          <label>Cena
+            <input id="price" name="price" type="number" min="0.01" step="0.01" required />
+          </label>
+          <label>Kod (4–20, litery/cyfry/-)
+            <input id="code" name="code" pattern="^[A-Za-z0-9-]{4,20}$" required />
+          </label>
+          <label>Email dostawcy
+            <input id="supplierEmail" name="supplierEmail" type="email" required />
+          </label>
+          <label>Data wydania (≤ dziś)
+            <input id="releaseDate" name="releaseDate" type="date" required />
+          </label>
+        </div>
+        <div class="actions">
+          <button type="submit">💾 Zapisz</button>
+          <button type="button" id="resetBtn" class="ghost">♻️ Reset</button>
+        </div>
+        <div id="uiErrors" class="errors"></div>
+        <div id="apiErrors" class="errors"></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Lista produktów</h2>
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th>ID</th><th>Nazwa</th><th>Cena</th><th>Kod</th><th>Email</th><th>Data</th><th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="foot">
+    © 2025 — Smart Products | Aliaksandra Bryshten 69000
+  </footer>
+
+  <script>
+    document.getElementById('releaseDate').max = new Date().toISOString().slice(0,10);
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
