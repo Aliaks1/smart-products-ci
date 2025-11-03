@@ -11,40 +11,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          check-latest: true
 
-      - name: Install backend deps
+      - name: Install & migrate backend
         working-directory: backend
         run: |
-          npm ci
+          npm install
           npm run migrate
           npm run seed
 
-      - name: Run tests
+      - name: Run unit & integration tests
         working-directory: backend
         run: npm test
 
-      - name: Build frontend
-        run: echo "Frontend OK ✅"
+      - name: Build frontend (static)
+        run: echo "Frontend build OK ✅"
 
   deploy_prod:
     needs: build_and_test
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Render
+      - name: Deploy to Render (optional)
         run: |
           if [ -n "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
             curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
           else
-            echo "⏭ Skip deploy: no Render hook"
+            echo "⚠️  Skip deploy: no RENDER_DEPLOY_HOOK"
           fi
-      - name: Smoke test
+
+      - name: Smoke /health
         run: |
           if [ -n "${{ secrets.PROD_URL }}" ]; then
             curl -fsSL "${{ secrets.PROD_URL }}/health"
           else
-            echo "⏭ Skip smoke: no PROD_URL"
+            echo "ℹ️  Skip smoke test: no PROD_URL"
           fi
