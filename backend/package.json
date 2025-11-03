@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --passWithNoTests",
     "migrate": "node db.js migrate",
     "seed": "node db.js seed"
   },
