@@ -21,7 +21,7 @@ function migrate() {
     `);
   });
   db.close();
-  console.log('✅ Migracja wykonana.');
+  console.log('✅ Migracja zakończona.');
 }
 
 function seed() {
@@ -29,10 +29,10 @@ function seed() {
   const stmt = db.prepare(
     'INSERT OR IGNORE INTO products (name, price, code, supplierEmail, releaseDate) VALUES (?,?,?,?,?)'
   );
-  stmt.run('Kamera Pro X', 1999.99, 'CAM-001', 'shop@example.com', '2025-03-01');
+  stmt.run('Kamera HD', 1299.99, 'CAM-2025', 'shop@example.com', '2025-01-10');
   stmt.finalize();
   db.close();
-  console.log('🌱 Seed dodany.');
+  console.log('🌱 Dane testowe dodane.');
 }
 
 if (require.main === module) {
