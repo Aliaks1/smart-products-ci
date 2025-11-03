@@ -1,73 +1,50 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Smart Products — Aliaksandra Bryshten 69000</title>
-  <link rel="stylesheet" href="style.css" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Products CI — Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>📦 Smart Products — Aliaksandra Bryshten</h1>
+      <p>Połączony z Render backend ✅</p>
+    </header>
 
-  <!-- 🧩 BACKEND URL — подставь свой Render backend -->
-  <script>
-    window.BACKEND_URL = "https://products-ci-aliaks.onrender.com"; 
-  </script>
-</head>
+    <main>
+      <section id="add-form">
+        <h2>Dodaj produkt</h2>
+        <input type="text" id="name" placeholder="Nazwa produktu" required>
+        <input type="number" id="price" placeholder="Cena" required>
+        <input type="text" id="code" placeholder="Kod" required>
+        <input type="email" id="supplierEmail" placeholder="E-mail dostawcy" required>
+        <input type="date" id="releaseDate" required>
+        <button id="addBtn">Dodaj</button>
+      </section>
 
-<body>
-  <header class="hero">
-    <h1>Smart Products</h1>
-    <p>Walidacje + CI/CD + Testy — pełny system CRUD</p>
-  </header>
+      <section id="list">
+        <h2>Lista produktów</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nazwa</th>
+              <th>Cena</th>
+              <th>Kod</th>
+              <th>E-mail</th>
+              <th>Data</th>
+              <th>Akcje</th>
+            </tr>
+          </thead>
+          <tbody id="productTable"></tbody>
+        </table>
+      </section>
+    </main>
 
-  <main class="container">
-    <section class="card">
-      <h2>Dodaj / Edytuj produkt</h2>
-      <form id="productForm" novalidate>
-        <div class="grid">
-          <label>Nazwa
-            <input id="name" name="name" required minlength="3" maxlength="50" />
-          </label>
-          <label>Cena
-            <input id="price" name="price" type="number" min="0.01" step="0.01" required />
-          </label>
-          <label>Kod (4–20, litery/cyfry/-)
-            <input id="code" name="code" pattern="^[A-Za-z0-9-]{4,20}$" required />
-          </label>
-          <label>Email dostawcy
-            <input id="supplierEmail" name="supplierEmail" type="email" required />
-          </label>
-          <label>Data wydania (≤ dziś)
-            <input id="releaseDate" name="releaseDate" type="date" required />
-          </label>
-        </div>
-        <div class="actions">
-          <button type="submit">💾 Zapisz</button>
-          <button type="button" id="resetBtn" class="ghost">♻️ Reset</button>
-        </div>
-        <div id="uiErrors" class="errors"></div>
-        <div id="apiErrors" class="errors"></div>
-      </form>
-    </section>
-
-    <section class="card">
-      <h2>Lista produktów</h2>
-      <table id="tbl">
-        <thead>
-          <tr>
-            <th>ID</th><th>Nazwa</th><th>Cena</th><th>Kod</th><th>Email</th><th>Data</th><th>Akcje</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
-
-  <footer class="foot">
-    © 2025 — Smart Products | Aliaksandra Bryshten 69000
-  </footer>
-
-  <script>
-    document.getElementById('releaseDate').max = new Date().toISOString().slice(0,10);
-  </script>
-  <script src="script.js"></script>
-</body>
+    <footer>
+      <p>Projekt CI/CD – Aliaksandra Bryshten 69000</p>
+    </footer>
+  </body>
 </html>
